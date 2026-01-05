@@ -1,0 +1,61 @@
+<UserControl x:Class="PersonalFinanceManager.Views.Import.TextImportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!-- Título -->
+        <TextBlock Grid.Row="0" Text="Importar de Texto" 
+                   FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+        <!-- Seletor de Formato -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="Formato:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <ComboBox ItemsSource="{Binding FormatosDisponiveis}"
+                      SelectedItem="{Binding FormatoSelecionado}"
+                      DisplayMemberPath="Nome"
+                      Width="300"/>
+            <Button Content="Ver Exemplo" 
+                    Command="{Binding MostrarExemploCommand}"
+                    Margin="10,0,0,0"/>
+        </StackPanel>
+        <!-- Área de Texto -->
+        <GroupBox Grid.Row="2" Header="Cole ou digite seus dados aqui:">
+            <TextBox Text="{Binding TextoImportacao, UpdateSourceTrigger=PropertyChanged}"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     VerticalScrollBarVisibility="Auto"
+                     FontFamily="Consolas"/>
+        </GroupBox>
+        <!-- Preview/Validação -->
+        <Expander Grid.Row="3" Header="Preview da Importação" 
+                  IsExpanded="{Binding MostrarPreview}"
+                  Margin="0,10,0,0">
+            <DataGrid ItemsSource="{Binding PendenciasPreview}"
+                      AutoGenerateColumns="False"
+                      Height="200">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nome" Binding="{Binding Nome}"/>
+                    <DataGridTextColumn Header="Valor" Binding="{Binding Valor, StringFormat=C}"/>
+                    <DataGridTextColumn Header="Data" Binding="{Binding DataVencimento, StringFormat=dd/MM/yyyy}"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Expander>
+        <!-- Botões -->
+        <StackPanel Grid.Row="4" Orientation="Horizontal" 
+                    HorizontalAlignment="Right" Margin="0,20,0,0">
+            <Button Content="Validar" 
+                    Command="{Binding ValidarCommand}"
+                    Width="100" Margin="0,0,10,0"/>
+            <Button Content="Importar" 
+                    Command="{Binding ImportarCommand}"
+                    IsEnabled="{Binding PodeImportar}"
+                    Width="100"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

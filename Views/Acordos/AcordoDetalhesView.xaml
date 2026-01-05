@@ -1,0 +1,145 @@
+<UserControl x:Class="PersonalFinanceManager.Views.Acordos.AcordoDetalhesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="700" d:DesignWidth="950">
+    
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Cabeçalho com Botão Voltar -->
+            <Grid Grid.Row="0" Margin="0,0,0,20">
+                <Button Content="← Voltar"
+                       Command="{Binding VoltarCommand}"
+                       Style="{StaticResource SecondaryButtonStyle}"
+                       HorizontalAlignment="Left"
+                       Width="100"/>
+                
+                <TextBlock Text="Detalhes do Acordo" 
+                          Style="{StaticResource TitleTextBlockStyle}"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"/>
+            </Grid>
+            
+            <!-- Informações Principais -->
+            <Border Grid.Row="1" Style="{StaticResource CardStyle}" Margin="0,0,0,20">
+                <StackPanel>
+                    <!-- Conteúdo visível quando Acordo está carregado -->
+                    <StackPanel>
+                        <!-- Nome da Pendência e Status Ativo -->
+                        <Grid Margin="0,0,0,15">
+                            <TextBlock FontSize="24" FontWeight="Bold" VerticalAlignment="Center">
+                                <Run Text="Acordo da Pendência: "/>
+                                <Run Text="{Binding Acordo.NomePendencia, Mode=OneWay}"/>
+                            </TextBlock>
+                            
+                            <Border Background="{StaticResource SuccessColor}"
+                                   CornerRadius="5"
+                                   Padding="12,6"
+                                   HorizontalAlignment="Right"
+                                   Visibility="{Binding Acordo.Ativo, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <TextBlock Text="ATIVO"
+                                          Foreground="White"
+                                          FontWeight="SemiBold"/>
+                            </Border>
+                        </Grid>
+                        
+                        <!-- Data e Observações -->
+                        <StackPanel Margin="0,0,0,20">
+                            <TextBlock>
+                                <Run Text="Data do Acordo: "/>
+                                <Run Text="{Binding Acordo.DataAcordo, StringFormat=dd/MM/yyyy, Mode=OneWay}" FontWeight="SemiBold"/>
+                            </TextBlock>
+                            <TextBlock Text="{Binding Acordo.Observacoes, Mode=OneWay}" TextWrapping="Wrap" Margin="0,10,0,0" Foreground="{StaticResource TextSecondaryColor}"/>
+                        </StackPanel>
+                        
+                        <!-- Valores -->
+                        <UniformGrid Columns="4" Rows="1" Margin="0,0,0,20">
+                            <StackPanel Margin="0,0,10,0">
+                                <TextBlock Text="Valor Total" Style="{StaticResource CardTitleStyle}"/>
+                                <TextBlock Text="{Binding Acordo.ValorTotal, StringFormat=C, Mode=OneWay}"
+                                          FontSize="24"
+                                          FontWeight="Bold"
+                                          Foreground="{StaticResource AccentColor}"/>
+                            </StackPanel>
+                            
+                            <StackPanel Margin="5,0">
+                                <TextBlock Text="Nº Parcelas" Style="{StaticResource CardTitleStyle}"/>
+                                <TextBlock Text="{Binding Acordo.NumeroParcelas, Mode=OneWay}"
+                                          FontSize="24"
+                                          FontWeight="Bold"/>
+                            </StackPanel>
+                            
+                            <StackPanel Margin="5,0">
+                                <TextBlock Text="Valor Pago" Style="{StaticResource CardTitleStyle}"/>
+                                <TextBlock Text="{Binding Acordo.ValorPago, StringFormat=C, Mode=OneWay}"
+                                          FontSize="24"
+                                          FontWeight="Bold"
+                                          Foreground="{StaticResource SuccessColor}"/>
+                            </StackPanel>
+                            
+                            <StackPanel Margin="10,0,0,0">
+                                <TextBlock Text="Valor Restante" Style="{StaticResource CardTitleStyle}"/>
+                                <TextBlock Text="{Binding Acordo.ValorRestante, StringFormat=C, Mode=OneWay}"
+                                          FontSize="24"
+                                          FontWeight="Bold"
+                                          Foreground="{StaticResource WarningColor}"/>
+                            </StackPanel>
+                        </UniformGrid>
+                        
+                        <!-- Parcelas -->
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource CardTitleStyle}" Margin="0,0,0,10">
+                                <Run Text="Parcelas Pagas: "/>
+                                <Run Text="{Binding Acordo.ParcelasPagas, Mode=OneWay}"/>
+                                <Run Text=" de "/>
+                                <Run Text="{Binding Acordo.NumeroParcelas, Mode=OneWay}"/>
+                            </TextBlock>
+                            <ProgressBar Height="25"
+                                        Value="{Binding Acordo.ParcelasPagas, Mode=OneWay}"
+                                        Maximum="{Binding Acordo.NumeroParcelas, Mode=OneWay}"
+                                        Foreground="{StaticResource SuccessColor}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                </StackPanel>
+            </Border>
+            
+            <!-- Ações -->
+            <Border Grid.Row="2" Style="{StaticResource CardStyle}" Margin="0,0,0,20">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="✏️ Editar"
+                           Command="{Binding EditarCommand}"
+                           Style="{StaticResource SecondaryButtonStyle}"
+                           Width="140"
+                           Margin="5"/>
+                    
+                    <Button Content="🗑️ Excluir"
+                           Command="{Binding ExcluirCommand}"
+                           Style="{StaticResource DangerButtonStyle}"
+                           Width="140"
+                           Margin="5"/>
+                </StackPanel>
+            </Border>
+            
+            <!-- Loading Overlay -->
+            <Border Grid.Row="0" Grid.RowSpan="4"
+                   Background="#80000000"
+                   Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}">
+                <TextBlock Text="Carregando..."
+                          Foreground="White"
+                          FontSize="20"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"/>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

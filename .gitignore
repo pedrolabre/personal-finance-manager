@@ -1,0 +1,102 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+*.log
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Local Python env/cache (repo has helper scripts)
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+*.sqlite
+*.sqlite3
+*.sqlite-shm
+*.sqlite-wal
+
+# EF Core Migrations (opcional - remova se quiser versionar)
+# Migrations/
+
+# NuGet
+*.nupkg
+*.snupkg
+**/packages/*
+*.nuget.props
+*.nuget.targets
+
+# Visual Studio cache/options
+.vs/
+
+# Rider
+.idea/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Mac
+.DS_Store
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Temporary files
+*.tmp
+*.temp
+
+# Local app/config/secrets (keep templates by using *.example)
+.env
+.env.*
+!.env.example
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.local.json
+settings.local.json
+secrets.json
+*.secrets.json
+
+# User data exports/backups (common formats)
+*.csv
+*.xlsx
+*.xls
+*.pdf
+*.zip
+
+# Repo-specific generated/temporary artifacts
+tmp_*
+log_geracao_relatorio.txt
+descartaveis_encontrados.txt
+test_check_report.py

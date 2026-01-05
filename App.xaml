@@ -1,0 +1,107 @@
+<Application x:Class="PersonalFinanceManager.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="clr-namespace:PersonalFinanceManager.Views"
+             xmlns:viewsPendencias="clr-namespace:PersonalFinanceManager.Views.Pendencias"
+             xmlns:viewsCartoes="clr-namespace:PersonalFinanceManager.Views.Cartoes"
+             xmlns:viewsRecebimentos="clr-namespace:PersonalFinanceManager.Views.Recebimentos"
+             xmlns:viewsAcordos="clr-namespace:PersonalFinanceManager.Views.Acordos"
+             xmlns:viewsImportacao="clr-namespace:PersonalFinanceManager.Views.Importacao"
+             xmlns:viewsRelatorios="clr-namespace:PersonalFinanceManager.Views.Relatorios"
+             xmlns:viewsConfiguracoes="clr-namespace:PersonalFinanceManager.Views.Configuracoes"
+             xmlns:vm="clr-namespace:PersonalFinanceManager.ViewModels"
+             xmlns:vmPendencias="clr-namespace:PersonalFinanceManager.ViewModels.Pendencias"
+             xmlns:vmCartoes="clr-namespace:PersonalFinanceManager.ViewModels.Cartoes"
+             xmlns:vmRecebimentos="clr-namespace:PersonalFinanceManager.ViewModels.Recebimentos"
+             xmlns:vmAcordos="clr-namespace:PersonalFinanceManager.ViewModels.Acordos"
+             xmlns:vmImportacao="clr-namespace:PersonalFinanceManager.ViewModels.Importacao"
+             xmlns:vmRelatorios="clr-namespace:PersonalFinanceManager.ViewModels.Relatorios"
+             xmlns:vmConfiguracoes="clr-namespace:PersonalFinanceManager.ViewModels.Configuracoes"
+             xmlns:converters="clr-namespace:PersonalFinanceManager.Resources.Converters"
+             >
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Buttons.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/TextBlocks.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Cards.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            
+            <!-- Converters -->
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <converters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"/>
+            <converters:StatusToColorConverter x:Key="StatusToColorConverter"/>
+            <converters:PrioridadeToColorConverter x:Key="PrioridadeToColorConverter"/>
+            <converters:StatusParcelaToColorConverter x:Key="StatusParcelaToColorConverter"/>
+            <converters:DateFormatConverter x:Key="DateFormatConverter"/>
+            <converters:NullOrEmptyToBoolConverter x:Key="NullOrEmptyToBoolConverter"/>
+            
+            <!-- DataTemplates para navegação automática -->
+            <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
+                <views:DashboardView/>
+            </DataTemplate>
+            
+            <!-- Pendências -->
+            <DataTemplate DataType="{x:Type vmPendencias:PendenciasListViewModel}">
+                <viewsPendencias:PendenciasListView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type vmPendencias:PendenciaFormViewModel}">
+                <viewsPendencias:PendenciaFormView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type vmPendencias:PendenciaDetalhesViewModel}">
+                <viewsPendencias:PendenciaDetalhesView/>
+            </DataTemplate>
+            
+            <!-- Cartões -->
+            <DataTemplate DataType="{x:Type vmCartoes:CartoesListViewModel}">
+                <viewsCartoes:CartoesListView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type vmCartoes:CartaoFormViewModel}">
+                <viewsCartoes:CartaoFormView/>
+            </DataTemplate>
+            
+            <!-- Recebimentos -->
+            <DataTemplate DataType="{x:Type vmRecebimentos:RecebimentosListViewModel}">
+                <viewsRecebimentos:RecebimentosListView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type vmRecebimentos:RecebimentoFormViewModel}">
+                <viewsRecebimentos:RecebimentoFormView/>
+            </DataTemplate>
+
+            <!-- Acordos -->
+            <DataTemplate DataType="{x:Type vmAcordos:AcordosListViewModel}">
+                <viewsAcordos:AcordosListView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vmAcordos:AcordoFormViewModel}">
+                <viewsAcordos:AcordoFormView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type vmAcordos:AcordoDetalhesViewModel}">
+                <viewsAcordos:AcordoDetalhesView/>
+            </DataTemplate>
+
+            <!-- Importação -->
+            <DataTemplate DataType="{x:Type vmImportacao:ImportacaoViewModel}">
+                <viewsImportacao:ImportacaoView/>
+            </DataTemplate>
+
+            <!-- Relatórios -->
+            <DataTemplate DataType="{x:Type vmRelatorios:RelatoriosViewModel}">
+                <viewsRelatorios:RelatoriosView/>
+            </DataTemplate>
+
+            <!-- Configurações -->
+            <DataTemplate DataType="{x:Type vmConfiguracoes:ConfiguracoesViewModel}">
+                <viewsConfiguracoes:ConfiguracoesView/>
+            </DataTemplate>
+            
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

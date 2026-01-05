@@ -1,0 +1,115 @@
+<!-- AcordosListView.xaml -->
+<UserControl
+    x:Class="PersonalFinanceManager.Views.Acordos.AcordosListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <UserControl.Resources>
+        <!-- Estilo de linha para acordos -->
+        <Style x:Key="AcordoRowStyle" TargetType="DataGridRow">
+            <Setter Property="Background" Value="Transparent"/>
+            <Style.Triggers>
+                <!-- Acordo quitado (todas parcelas pagas) -->
+                <DataTrigger Binding="{Binding ValorRestante}" Value="0">
+                    <Setter Property="Background" Value="#E8F5E9"/>
+                    <Setter Property="Foreground" Value="#2E7D32"/>
+                </DataTrigger>
+                <!-- Acordo inativo -->
+                <DataTrigger Binding="{Binding Ativo}" Value="False">
+                    <Setter Property="Background" Value="#ECEFF1"/>
+                    <Setter Property="Foreground" Value="#78909C"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Título -->
+        <TextBlock Grid.Row="0" 
+                   Text="Acordos Ativos" 
+                   Style="{StaticResource TitleTextBlockStyle}" 
+                   Margin="0,0,0,20"/>
+        
+        <!-- Barra de ações -->
+        <StackPanel Grid.Row="1" 
+                    Orientation="Horizontal" 
+                    Margin="0,0,0,20">
+            <Button Content="Novo Acordo"
+                    Command="{Binding NovoAcordoCommand}"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Width="140"
+                    Height="40"
+                    Margin="0,0,10,0"/>
+            <Button Content="Atualizar"
+                    Command="{Binding AtualizarCommand}"
+                    Style="{StaticResource SecondaryButtonStyle}"
+                    Width="100"
+                    Margin="0,0,10,0"/>
+            <CheckBox Content="Mostrar inativos"
+                      IsChecked="{Binding MostrarInativos}"
+                      VerticalAlignment="Center"
+                      Margin="10,0,0,0"/>
+        </StackPanel>
+        
+        <!-- Grid de dados -->
+        <DataGrid Grid.Row="2" 
+                  ItemsSource="{Binding Acordos}"
+                  AutoGenerateColumns="False" 
+                  CanUserAddRows="False" 
+                  HeadersVisibility="Column" 
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  RowStyle="{StaticResource AcordoRowStyle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="60"/>
+                <DataGridTextColumn Header="Descrição" Binding="{Binding Descricao}" Width="*"/>
+                <DataGridTextColumn Header="Valor Total" Binding="{Binding ValorTotal, StringFormat=R$ {0:N2}}" Width="120"/>
+                <DataGridTextColumn Header="Parcelas" Binding="{Binding NumeroParcelas}" Width="80"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="120"/>
+                <DataGridTemplateColumn Header="Ações" Width="95">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" 
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center">
+                                <Button Content="👁️"
+                                        Command="{Binding DataContext.VisualizarCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding Id}"
+                                        ToolTip="Visualizar"
+                                        Style="{StaticResource SecondaryButtonStyle}"
+                                        Width="26"
+                                        Height="26"
+                                        FontSize="11"
+                                        Margin="1"/>
+                                <Button Content="✏️"
+                                        Command="{Binding DataContext.EditarCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding Id}"
+                                        ToolTip="Editar"
+                                        Style="{StaticResource SecondaryButtonStyle}"
+                                        Width="26"
+                                        Height="26"
+                                        FontSize="11"
+                                        Margin="1"/>
+                                <Button Content="🗑️"
+                                        Command="{Binding DataContext.ExcluirCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding Id}"
+                                        ToolTip="Excluir"
+                                        Style="{StaticResource DangerButtonStyle}"
+                                        Width="26"
+                                        Height="26"
+                                        FontSize="11"
+                                        Margin="1"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,142 @@
+<UserControl x:Class="PersonalFinanceManager.Views.Configuracoes.ConfiguracoesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="700" d:DesignWidth="950">
+    
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Título -->
+            <TextBlock Grid.Row="0" 
+                      Text="Configurações"
+                      Style="{StaticResource TitleTextBlockStyle}"
+                      Margin="0,0,0,30"/>
+            
+            <!-- Conteúdo -->
+            <StackPanel Grid.Row="1">
+                
+                <!-- Seção: Relatórios -->
+                <Border Style="{StaticResource CardStyle}" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="Relatórios"
+                                  FontSize="18"
+                                  FontWeight="SemiBold"
+                                  Margin="0,0,0,20"/>
+                        
+                        <!-- Caminho Padrão -->
+                        <TextBlock Text="Caminho Padrão para Relatórios" 
+                                  Style="{StaticResource FormLabelStyle}"/>
+                        <Grid Margin="0,0,0,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBox Grid.Column="0"
+                                    Text="{Binding CaminhoPadraoRelatorios, UpdateSourceTrigger=PropertyChanged}"
+                                    Height="40"
+                                    Padding="10"
+                                    BorderBrush="{StaticResource BorderColor}"
+                                    BorderThickness="1"
+                                    IsReadOnly="True"
+                                    Background="#F5F5F5"/>
+                            
+                            <Button Grid.Column="1"
+                                   Content="Abrir Pasta"
+                                   Command="{Binding AbrirPastaRelatoriosCommand}"
+                                   Style="{StaticResource SecondaryButtonStyle}"
+                                   Width="120"
+                                   Margin="10,0,0,0"/>
+                        </Grid>
+                        
+                        <!-- Opções de Relatório -->
+                        <CheckBox IsChecked="{Binding ExibirGraficosRelatorios}"
+                                 Content="Incluir gráficos nos relatórios"
+                                 Margin="0,0,0,10"/>
+                        
+                        <CheckBox IsChecked="{Binding IncluirDetalhesRelatorios}"
+                                 Content="Incluir detalhes completos nos relatórios"
+                                 Margin="0,0,0,10"/>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Seção: Sistema -->
+                <Border Style="{StaticResource CardStyle}" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="Sistema"
+                                  FontSize="18"
+                                  FontWeight="SemiBold"
+                                  Margin="0,0,0,20"/>
+                        
+                        <!-- Versão -->
+                        <Grid Margin="0,0,0,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Grid.Column="0" 
+                                      Text="Versão:" 
+                                      FontWeight="SemiBold"
+                                      Margin="0,0,10,0"/>
+                            <TextBlock Grid.Column="1" 
+                                      Text="{Binding VersaoAplicacao}"
+                                      Foreground="{StaticResource TextSecondaryColor}"/>
+                        </Grid>
+                        
+                        <!-- Base de Dados -->
+                        <TextBlock Text="Localização da Base de Dados" 
+                                  Style="{StaticResource FormLabelStyle}"/>
+                        <Grid Margin="0,0,0,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBox Grid.Column="0"
+                                    Text="{Binding CaminhoBaseDados}"
+                                    Height="40"
+                                    Padding="10"
+                                    BorderBrush="{StaticResource BorderColor}"
+                                    BorderThickness="1"
+                                    IsReadOnly="True"
+                                    Background="#F5F5F5"/>
+                            
+                            <Button Grid.Column="1"
+                                   Content="Abrir Pasta"
+                                   Command="{Binding AbrirPastaBaseDadosCommand}"
+                                   Style="{StaticResource SecondaryButtonStyle}"
+                                   Width="120"
+                                   Margin="10,0,0,0"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            
+            <!-- Botões de Ação -->
+            <StackPanel Grid.Row="2" 
+                       Orientation="Horizontal"
+                       HorizontalAlignment="Right"
+                       Margin="0,20,0,0">
+                <Button Content="Restaurar Padrões"
+                       Command="{Binding RestaurarPadroesCommand}"
+                       Style="{StaticResource SecondaryButtonStyle}"
+                       Width="150"
+                       Margin="0,0,10,0"/>
+                
+                <Button Content="Salvar"
+                       Command="{Binding SalvarCommand}"
+                       Style="{StaticResource PrimaryButtonStyle}"
+                       Width="120"/>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

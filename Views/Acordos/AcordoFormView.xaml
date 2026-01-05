@@ -1,0 +1,125 @@
+<!-- AcordoFormView.xaml -->
+<UserControl x:Class="PersonalFinanceManager.Views.Acordos.AcordoFormView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="700" d:DesignWidth="950">
+    
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Título -->
+            <TextBlock Grid.Row="0" 
+                      Text="{Binding Titulo}"
+                      Style="{StaticResource TitleTextBlockStyle}"
+                      Margin="0,0,0,30"/>
+            
+            <!-- Formulário -->
+            <Border Grid.Row="1" Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <!-- Nome do Acordo -->
+                    <TextBlock Text="Nome do Acordo *" Style="{StaticResource FormLabelStyle}"/>
+                    <TextBox Text="{Binding NomeAcordo, UpdateSourceTrigger=PropertyChanged}"
+                            Height="40"
+                            Padding="10"
+                            BorderBrush="{StaticResource BorderColor}"
+                            BorderThickness="1"
+                            Margin="0,0,0,20"/>
+                    
+                    <!-- Descrição -->
+                    <TextBlock Text="Descrição" Style="{StaticResource FormLabelStyle}"/>
+                    <TextBox Text="{Binding Descricao, UpdateSourceTrigger=PropertyChanged}"
+                            Height="80"
+                            Padding="10"
+                            TextWrapping="Wrap"
+                            AcceptsReturn="True"
+                            VerticalScrollBarVisibility="Auto"
+                            BorderBrush="{StaticResource BorderColor}"
+                            BorderThickness="1"
+                            Margin="0,0,0,20"/>
+                    
+                    <!-- Valor Total e Número de Parcelas -->
+                    <Grid Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!-- Valor Total -->
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Valor Total *" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding ValorTotal, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"
+                                    Height="40"
+                                    Padding="10"
+                                    BorderBrush="{StaticResource BorderColor}"
+                                    BorderThickness="1"/>
+                        </StackPanel>
+                        
+                        <!-- Número de Parcelas -->
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Número de Parcelas *" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding NumeroParcelas, UpdateSourceTrigger=PropertyChanged}"
+                                    Height="40"
+                                    Padding="10"
+                                    BorderBrush="{StaticResource BorderColor}"
+                                    BorderThickness="1"/>
+                        </StackPanel>
+                    </Grid>
+                    
+                    <!-- Data de Início -->
+                    <Grid Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!-- Data de Início -->
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Data de Início" Style="{StaticResource FormLabelStyle}"/>
+                            <DatePicker SelectedDate="{Binding DataInicio}"
+                                       Height="40"
+                                       BorderBrush="{StaticResource BorderColor}"
+                                       BorderThickness="1"/>
+                        </StackPanel>
+                        
+                        <!-- Status Ativo -->
+                        <StackPanel Grid.Column="2" VerticalAlignment="Bottom">
+                            <CheckBox IsChecked="{Binding Ativo}"
+                                     Content="Acordo Ativo"
+                                     Margin="0,0,0,10"/>
+                        </StackPanel>
+                    </Grid>
+                    
+                </StackPanel>
+            </Border>
+            
+            <!-- Botões de Ação -->
+            <StackPanel Grid.Row="2" 
+                       Orientation="Horizontal"
+                       HorizontalAlignment="Right"
+                       Margin="0,20,0,0">
+                <Button Content="Cancelar"
+                       Command="{Binding CancelarCommand}"
+                       Style="{StaticResource SecondaryButtonStyle}"
+                       Width="120"
+                       Height="40"
+                       Margin="0,0,10,0"/>
+                
+                <Button Content="Salvar"
+                       Command="{Binding SalvarCommand}"
+                       Style="{StaticResource PrimaryButtonStyle}"
+                       Width="120"
+                       Height="40"/>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

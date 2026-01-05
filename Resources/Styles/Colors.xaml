@@ -1,0 +1,42 @@
+<!-- Colors.xaml: Definições de cores globais -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- Cores Principais -->
+    <SolidColorBrush x:Key="PrimaryColor" Color="#2C3E50"/>
+    <SolidColorBrush x:Key="SecondaryColor" Color="#3498DB"/>
+    <SolidColorBrush x:Key="AccentColor" Color="#E74C3C"/>
+    <SolidColorBrush x:Key="SuccessColor" Color="#27AE60"/>
+    <SolidColorBrush x:Key="WarningColor" Color="#F39C12"/>
+    <SolidColorBrush x:Key="DangerColor" Color="#E74C3C"/>
+    
+    <!-- Cores de Fundo -->
+    <SolidColorBrush x:Key="BackgroundColor" Color="#ECF0F1"/>
+    <SolidColorBrush x:Key="SidebarColor" Color="#2C3E50"/>
+    <SolidColorBrush x:Key="CardBackground" Color="#FFFFFF"/>
+    
+    <!-- Cores de Texto -->
+    <SolidColorBrush x:Key="TextPrimaryColor" Color="#2C3E50"/>
+    <SolidColorBrush x:Key="TextSecondaryColor" Color="#7F8C8D"/>
+    <SolidColorBrush x:Key="TextLightColor" Color="#FFFFFF"/>
+    
+    <!-- Cores de Borda -->
+    <SolidColorBrush x:Key="BorderColor" Color="#BDC3C7"/>
+    <SolidColorBrush x:Key="BorderLightColor" Color="#E0E0E0"/>
+    
+    <!-- Cores de Hover -->
+    <SolidColorBrush x:Key="HoverColor" Color="#34495E"/>
+    <SolidColorBrush x:Key="HoverLightColor" Color="#F5F5F5"/>
+    
+    <!-- Cores de Status -->
+    <SolidColorBrush x:Key="StatusEmAbertoColor" Color="#F39C12"/>
+    <SolidColorBrush x:Key="StatusAcordadaColor" Color="#3498DB"/>
+    <SolidColorBrush x:Key="StatusQuitadaColor" Color="#27AE60"/>
+    <SolidColorBrush x:Key="StatusAtrasadaColor" Color="#E74C3C"/>
+    
+    <!-- Cores de Prioridade -->
+    <SolidColorBrush x:Key="PrioridadeBaixaColor" Color="#95A5A6"/>
+    <SolidColorBrush x:Key="PrioridadeMediaColor" Color="#F39C12"/>
+    <SolidColorBrush x:Key="PrioridadeAltaColor" Color="#E74C3C"/>
+    
+</ResourceDictionary>

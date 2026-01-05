@@ -1,0 +1,31 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- Card Base -->
+    <Style x:Key="CardStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource CardBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderLightColor}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Padding" Value="20"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Color="#000000" 
+                                 Opacity="0.1" 
+                                 BlurRadius="10" 
+                                 ShadowDepth="2"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Card Small -->
+    <Style x:Key="CardSmallStyle" TargetType="Border" BasedOn="{StaticResource CardStyle}">
+        <Setter Property="Padding" Value="15"/>
+    </Style>
+    
+    <!-- Card Large -->
+    <Style x:Key="CardLargeStyle" TargetType="Border" BasedOn="{StaticResource CardStyle}">
+        <Setter Property="Padding" Value="30"/>
+    </Style>
+    
+</ResourceDictionary>

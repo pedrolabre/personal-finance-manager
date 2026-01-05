@@ -1,0 +1,102 @@
+<!-- CartaoFormView.xaml -->
+<UserControl x:Class="PersonalFinanceManager.Views.Cartoes.CartaoFormView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Título -->
+            <TextBlock Grid.Row="0"
+                       Text="{Binding Titulo}"
+                       Style="{StaticResource TitleTextBlockStyle}"
+                       Margin="0,0,0,30"/>
+
+            <!-- Formulário -->
+            <Border Grid.Row="1" Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <!-- Nome -->
+                    <TextBlock Text="Nome do Cartão *" Style="{StaticResource FormLabelStyle}"/>
+                    <TextBox Text="{Binding Nome, UpdateSourceTrigger=PropertyChanged}"
+                             Height="40"
+                             Padding="10"
+                             BorderBrush="{StaticResource BorderColor}"
+                             BorderThickness="1"
+                             Margin="0,0,0,20"/>
+
+                    <!-- Banco -->
+                    <TextBlock Text="Banco" Style="{StaticResource FormLabelStyle}"/>
+                    <TextBox Text="{Binding Banco, UpdateSourceTrigger=PropertyChanged}"
+                             Height="40"
+                             Padding="10"
+                             BorderBrush="{StaticResource BorderColor}"
+                             BorderThickness="1"
+                             Margin="0,0,0,20"/>
+
+                    <!-- Dias -->
+                    <Grid Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Dia de Vencimento *" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding DiaVencimento, UpdateSourceTrigger=PropertyChanged}"
+                                     Height="40"
+                                     Padding="10"
+                                     BorderBrush="{StaticResource BorderColor}"
+                                     BorderThickness="1"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Dia de Fechamento *" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding DiaFechamento, UpdateSourceTrigger=PropertyChanged}"
+                                     Height="40"
+                                     Padding="10"
+                                     BorderBrush="{StaticResource BorderColor}"
+                                     BorderThickness="1"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Limite -->
+                    <TextBlock Text="Limite" Style="{StaticResource FormLabelStyle}"/>
+                    <TextBox Text="{Binding Limite, UpdateSourceTrigger=PropertyChanged}"
+                             Height="40"
+                             Padding="10"
+                             BorderBrush="{StaticResource BorderColor}"
+                             BorderThickness="1"
+                             Margin="0,0,0,20"/>
+
+                    <!-- Ativo -->
+                    <CheckBox IsChecked="{Binding Ativo}"
+                               Content="Cartão Ativo"
+                               Margin="0,0,0,10"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Botões de Ação -->
+            <StackPanel Grid.Row="2"
+                       Orientation="Horizontal"
+                       HorizontalAlignment="Right"
+                       Margin="0,20,0,0">
+                <Button Content="Cancelar"
+                        Command="{Binding CancelarCommand}"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Width="120"
+                        Height="40"
+                        Margin="0,0,10,0"/>
+
+                <Button Content="Salvar"
+                        Command="{Binding SalvarCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Width="120"
+                        Height="40"/>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
+

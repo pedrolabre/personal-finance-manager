@@ -1,0 +1,127 @@
+
+<UserControl x:Class="PersonalFinanceManager.Views.Recebimentos.RecebimentoFormView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="700" d:DesignWidth="950">
+    
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Título -->
+            <TextBlock Grid.Row="0" 
+                      Text="{Binding Titulo}"
+                      Style="{StaticResource TitleTextBlockStyle}"
+                      Margin="0,0,0,30"/>
+            
+            <!-- Formulário -->
+            <Border Grid.Row="1" 
+                   Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <!-- Descrição -->
+                    <TextBlock Text="Descrição *" Style="{StaticResource FormLabelStyle}"/>
+                    <TextBox Text="{Binding Descricao, UpdateSourceTrigger=PropertyChanged}"
+                            Height="40"
+                            Padding="10"
+                            BorderBrush="{StaticResource BorderColor}"
+                            BorderThickness="1"
+                            Margin="0,0,0,20"/>
+                    
+                    <!-- Categoria -->
+                    <TextBlock Text="Categoria *" Style="{StaticResource FormLabelStyle}"/>
+                    <ComboBox ItemsSource="{Binding Categorias}"
+                             SelectedItem="{Binding Categoria}"
+                             Height="40"
+                             Padding="10,0"
+                             BorderBrush="{StaticResource BorderColor}"
+                             BorderThickness="1"
+                             Margin="0,0,0,20"/>
+                    
+                    <!-- Data Prevista -->
+                    <TextBlock Text="Data Prevista *" Style="{StaticResource FormLabelStyle}"/>
+                    <DatePicker SelectedDate="{Binding DataPrevista}"
+                               Height="40"
+                               BorderBrush="{StaticResource BorderColor}"
+                               BorderThickness="1"
+                               Margin="0,0,0,20"/>
+                    
+                    <!-- Valor Esperado -->
+                    <TextBlock Text="Valor Esperado *" Style="{StaticResource FormLabelStyle}"/>
+                    <TextBox Text="{Binding ValorEsperado, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"
+                            Height="40"
+                            Padding="10"
+                            BorderBrush="{StaticResource BorderColor}"
+                            BorderThickness="1"
+                            Margin="0,0,0,20"/>
+                    
+                    <!-- Seção de Recebimento (apenas para edição) -->
+                    <Border BorderBrush="{StaticResource BorderLightColor}"
+                           BorderThickness="1"
+                           Padding="15"
+                           CornerRadius="5"
+                           Margin="0,0,0,20"
+                           Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <StackPanel>
+                            <TextBlock Text="Informações de Recebimento"
+                                      FontWeight="SemiBold"
+                                      Margin="0,0,0,15"/>
+                            
+                            <!-- Valor Recebido -->
+                            <TextBlock Text="Valor Recebido" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding ValorRecebido, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"
+                                    Height="40"
+                                    Padding="10"
+                                    BorderBrush="{StaticResource BorderColor}"
+                                    BorderThickness="1"
+                                    Margin="0,0,0,15"/>
+                            
+                            <!-- Data de Recebimento -->
+                            <TextBlock Text="Data de Recebimento" Style="{StaticResource FormLabelStyle}"/>
+                            <DatePicker SelectedDate="{Binding DataRecebimento}"
+                                       Height="40"
+                                       BorderBrush="{StaticResource BorderColor}"
+                                       BorderThickness="1"
+                                       Margin="0,0,0,15"/>
+                            
+                            <!-- Recebimento Completo -->
+                            <CheckBox IsChecked="{Binding RecebimentoCompleto}"
+                                     Content="Recebimento completo"
+                                     Margin="0,0,0,10"/>
+                        </StackPanel>
+                    </Border>
+                    
+                    <TextBlock Text="* Campos obrigatórios"
+                              FontSize="12"
+                              Foreground="{StaticResource TextSecondaryColor}"
+                              Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+            
+            <!-- Botões de Ação -->
+            <StackPanel Grid.Row="2" 
+                       Orientation="Horizontal"
+                       HorizontalAlignment="Right"
+                       Margin="0,20,0,0">
+                <Button Content="Cancelar"
+                       Command="{Binding CancelarCommand}"
+                       Style="{StaticResource SecondaryButtonStyle}"
+                       Width="120"
+                       Height="40"
+                       Margin="0,0,10,0"/>
+                
+                <Button Content="Salvar"
+                       Command="{Binding SalvarCommand}"
+                       Style="{StaticResource PrimaryButtonStyle}"
+                       Width="120"
+                       Height="40"/>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
